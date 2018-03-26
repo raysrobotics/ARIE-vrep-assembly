@@ -1,26 +1,15 @@
 @echo off
-
-if "%1"=="1" goto one_console
-if "%1"=="2" goto two_console
-if "%1"=="3" goto thr_console
-if "%1"=="4" goto fou_console
-
-:fou_console
-echo Open V-rep with port 20000...
-start vrep.exe %2 -gREMOTEAPISERVERSERVICE_20000_FALSE_TRUE "D:\Projects\VREP\RemoteApi_ARIE_Assembly.ttt"
-
-:thr_console
-echo Open V-rep with port 19999...
-start vrep.exe %2 -gREMOTEAPISERVERSERVICE_19999_FALSE_TRUE "D:\Projects\VREP\RemoteApi_ARIE_Assembly.ttt"
-
-:two_console
-echo Open V-rep with port 19998...
-start vrep.exe %2 -gREMOTEAPISERVERSERVICE_19998_FALSE_TRUE "D:\Projects\VREP\RemoteApi_ARIE_Assembly.ttt"
-
-:one_console
-echo Open V-rep with port 19997...
-start vrep.exe %2 -gREMOTEAPISERVERSERVICE_19997_FALSE_TRUE "D:\Projects\VREP\RemoteApi_ARIE_Assembly.ttt"
+REM 参数%1：需开启几个vrep console  参数%2（可选）：-h 有该参数则不显示图形界面
 
 
+REM 在这里配置vrep的安装目录，默认为C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe
+set VREP="C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
+set PORT_START=19997
+set /a PORT_END=%1+19997-1
 
- 
+for /l %%i in (%PORT_START%, 1, %PORT_END%) do (
+REM @echo %%i
+echo Open V-rep with scene file RemoteApi_ARIE_Assembly.ttt while listening to port %%i...
+start "" %VREP% %2 -gREMOTEAPISERVERSERVICE_%%i_FALSE_TRUE "%cd%\RemoteApi_ARIE_Assembly.ttt"
+)
+
