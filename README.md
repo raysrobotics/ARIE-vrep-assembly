@@ -3,16 +3,13 @@ ARIE visualization package based on v-rep simulation environment
 
 
 
-## 配置方法
+## 配置和运行方法
 
 1. 安装V-REP（目前在3.4.0版本上可正常运行）；
 2. 安装Python 3.5（可通过Anaconda安装依赖的包）；
 3. 从https://gitee.com/raysworld/V-rep-based-ARIE-Visualization下载源代码；
-4. ​
-
-
-
-
+4. 运行```/vrep_files```文件夹下的run_vrep.ps1脚本开启vrep console，每个开启的console对应一个端口，可通过remote API进行通讯；
+5. 运行```/python_files```文件夹下的run_sim.bat脚本运行仿真
 
 
 
