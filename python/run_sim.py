@@ -32,8 +32,8 @@ except:
     print ('--------------------------------------------------------------')
     print ('')
 
-import sys
-import ctypes
+import sys,os
+#import ctypes
 import time
 import numpy as np
 import argparse
@@ -170,20 +170,37 @@ if res==vrep.simx_return_ok:
 obj_hol_init_pos = [0, 0, 0.046]
 vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
 
-obj_peg_init_pos = [0, 0.005, 20e-2]
+obj_peg_init_pos = [0, 0.005, 15e-2]
 obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(-90)]
 vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_blocking)
 vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
 
 # Set Orientation of the peg(ore_x_peg, ore_y_peg, ore_z_peg) relative to its own coordinate framework
-obj_peg_init_ore = [np.deg2rad(ore_x_peg), np.deg2rad(0), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+#obj_peg_init_ore = [np.deg2rad(ore_x_peg), np.deg2rad(0), np.deg2rad(0)]
+#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+#
+#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(ore_y_peg), np.deg2rad(0)]
+#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+#
+#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(ore_z_peg)]
+#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
 
-obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(ore_y_peg), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
 
-obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(ore_z_peg)]
-vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+new_pos = [curr_pos[0]+np.deg2rad(ore_x_peg), curr_pos[1], curr_pos[2]];
+#obj_peg_init_ore = [np.deg2rad(peg_ore_x), np.deg2rad(0), np.deg2rad(0)]
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+new_pos = [curr_pos[0], curr_pos[1]+np.deg2rad(ore_y_peg), curr_pos[2]];
+#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(peg_ore_y), np.deg2rad(0)]
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+new_pos = [curr_pos[0], curr_pos[1], curr_pos[2]+np.deg2rad(ore_z_peg)];
+#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(peg_ore_z)]
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+
 
 # Fit to view
 vrep.simxCallScriptFunction(clientID,'remoteApiCommandServer',vrep.sim_scripttype_customizationscript, 'setCameraFitToView_function',[h_peg, h_hole],[],[],emptyBuff,vrep.simx_opmode_blocking)
@@ -191,8 +208,10 @@ vrep.simxCallScriptFunction(clientID,'remoteApiCommandServer',vrep.sim_scripttyp
 
 timestamp = time.strftime('%Y-%m-%d-%H%M',time.localtime(time.time()))
 filename = 'results' + timestamp + '_port{0}'.format(remotePort) + '.csv'
+cur_path = os.path.dirname(os.path.realpath(__file__))
+file_and_path = '%s/../results/%s' % (cur_path, filename)
 
-h_file=open(filename, 'w+')
+h_file=open(file_and_path, 'w+')
 
 # initialize loop variables
 z_init = obj_peg_init_pos[2]
@@ -263,9 +282,9 @@ vrep.simxFinish(clientID)
 
 if args.plot:
     # Data Visualization
-    from mpl_toolkits.mplot3d import Axes3D
+#    from mpl_toolkits.mplot3d import Axes3D
     import csv
-    from matplotlib import cm
+#    from matplotlib import cm
     import matplotlib.pyplot as plt
     #import pandas as pd
     

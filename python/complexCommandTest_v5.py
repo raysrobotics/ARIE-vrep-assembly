@@ -36,17 +36,30 @@ except:
     print ('')
 
 import sys
-import ctypes
+import os
+#import ctypes
 import time
-import numpy as np
+try:
+    import numpy as np
+except:
+    print ('--------------------------------------------------------------')
+    print ('"numpy" could not be imported. Do you run this script in ')
+    print ('Anaconda environment?')
+    print ('--------------------------------------------------------------')
+    print ('')
 
 # remoteIP = '10.0.9.140'
 # obj_peg_path = '/home/ray/MyModels/peg.obj'
 # obj_hol_path = '/home/ray/MyModels/hole_40_2.obj'
 
 remoteIP = '127.0.0.1'
-obj_peg_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl'
-obj_hol_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl'
+
+cur_path = os.path.dirname(os.path.realpath(__file__))
+obj_peg_path = '%s/../models/tri_peg_hole/peg_tri_r_200_h_801.stl' % cur_path
+obj_hol_path = '%s/../models/tri_peg_hole/hol_tri_r_201_h_901.stl' % cur_path
+
+#obj_peg_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl'
+#obj_hol_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl'
 
 #obj_peg_init_pos = [0, 0, 20e-2]
 #obj_peg_init_ore = [0, 0, 0] #-np.pi/2-np.pi/1
@@ -108,29 +121,29 @@ if res==vrep.simx_return_ok:
 obj_hol_init_pos = [0, 0, 0.046]
 vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
 
-obj_peg_init_pos = [0, 0.005, 20e-2]
+obj_peg_init_pos = [0, 0.005, 15e-2]
 obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(-90)]
 vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_blocking)
 vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
 
-#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(15), np.deg2rad(0)]
-#if (obj_peg_init_ore[0] != 0.0) and (obj_peg_init_ore[1] != 0.0):
-#    print ('peg-ore-x and peg-ore-y cannot be specified together. peg-ore-y will be omitted.')
-#    obj_peg_init_ore[1] = 0.0
-#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+peg_ore_x = -10
+peg_ore_y = 0
+peg_ore_z = 0
 
-peg_ore_x = 10
-peg_ore_y = 30
-peg_ore_z = 10
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+new_pos = [curr_pos[0]+np.deg2rad(peg_ore_x), curr_pos[1], curr_pos[2]];
+#obj_peg_init_ore = [np.deg2rad(peg_ore_x), np.deg2rad(0), np.deg2rad(0)]
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
 
-obj_peg_init_ore = [np.deg2rad(peg_ore_x), np.deg2rad(0), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+new_pos = [curr_pos[0], curr_pos[1]+np.deg2rad(peg_ore_y), curr_pos[2]];
+#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(peg_ore_y), np.deg2rad(0)]
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
 
-obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(peg_ore_y), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
-
-obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(peg_ore_z)]
-vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+new_pos = [curr_pos[0], curr_pos[1], curr_pos[2]+np.deg2rad(peg_ore_z)];
+#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(peg_ore_z)]
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
 
 #vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
 #vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
