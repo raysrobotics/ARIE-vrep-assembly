@@ -1,9 +1,22 @@
 @echo off
+setlocal enabledelayedexpansion
 
-start python run_sim.py "D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl" "D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl" 0.0 10.0 0.0 --ip-addr "127.0.0.1" --port 19997 --precision-x 5e-4 --precision-y 5e-4 --plot --x-start -0.04 --x-end 0.04 --y-start -0.04 --y-end 0.04
+set IPADDR="127.0.0.1"
+set PEG_PATH="D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl"
+set HOL_PATH="D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl"
+set X_START=-0.04
+set X_END=0.04
+set Y_START=-0.04
+set Y_END=0.04
+set X_PRECISION=5e-4
+set Y_PRECISION=5e-4
 
-start python run_sim.py "D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl" "D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl" 0.0 10.0 5.0 --ip-addr "127.0.0.1" --port 19998 --precision-x 5e-4 --precision-y 5e-4 --plot --x-start -0.04 --x-end 0.04 --y-start -0.04 --y-end 0.04
+set PORT_START=19997
+set /a PORT_END=%1+19997-1
+set COUNT=%1
 
-start python run_sim.py "D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl" "D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl" 0.0 10.0 10.0 --ip-addr "127.0.0.1" --port 19999 --precision-x 5e-4 --precision-y 5e-4 --plot --x-start -0.04 --x-end 0.04 --y-start -0.04 --y-end 0.04
-
-start python run_sim.py "D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl" "D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl" 0.0 10.0 15.0 --ip-addr "127.0.0.1" --port 20000 --precision-x 5e-4 --precision-y 5e-4 --plot --x-start -0.04 --x-end 0.04 --y-start -0.04 --y-end 0.04
+for /l %%i in (0, 1, %COUNT%) do (
+set /a PORT=%PORT_START%+%%i
+set /a ANGLE=5*%%i
+start python run_sim.py %PEG_PATH% %HOL_PATH% 0.0 15.0 !ANGLE! --ip-addr %IPADDR% --port !PORT! --precision-x %X_PRECISION% --precision-y %Y_PRECISION% --plot --x-start %X_START% --x-end %X_END% --y-start %Y_START% --y-end %Y_END%
+)
