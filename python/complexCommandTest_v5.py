@@ -54,9 +54,9 @@ except:
 
 remoteIP = '127.0.0.1'
 
-cur_path = os.path.dirname(os.path.realpath(__file__))
-obj_peg_path = '%s/../models/tri_peg_hole/peg_tri_r_200_h_801.stl' % cur_path
-obj_hol_path = '%s/../models/tri_peg_hole/hol_tri_r_201_h_901.stl' % cur_path
+cur_path = os.path.dirname(os.path.realpath('./'))
+obj_peg_path = '%s/models/tri_peg_hole/peg_tri_r_200_h_801.stl' % cur_path
+obj_hol_path = '%s/models/tri_peg_hole/hol_tri_r_201_h_901.stl' % cur_path
 
 #obj_peg_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl'
 #obj_hol_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl'
@@ -125,25 +125,27 @@ obj_peg_init_pos = [0, 0.005, 15e-2]
 obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(-90)]
 vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_blocking)
 vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
+vrep.simxGetObjectOrientation(clientID,h_peg,h_peg,vrep.simx_opmode_streaming)
 
-peg_ore_x = -10
+
+peg_ore_x = 0
 peg_ore_y = 0
-peg_ore_z = 0
+peg_ore_z = 10
 
-retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,h_peg,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0]+np.deg2rad(peg_ore_x), curr_pos[1], curr_pos[2]];
 #obj_peg_init_ore = [np.deg2rad(peg_ore_x), np.deg2rad(0), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, new_pos, vrep.simx_opmode_oneshot)
 
-retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
+retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,h_peg,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0], curr_pos[1]+np.deg2rad(peg_ore_y), curr_pos[2]];
 #obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(peg_ore_y), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, new_pos, vrep.simx_opmode_oneshot)
 
 retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0], curr_pos[1], curr_pos[2]+np.deg2rad(peg_ore_z)];
 #obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(peg_ore_z)]
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_oneshot)
 
 #vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
 #vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
