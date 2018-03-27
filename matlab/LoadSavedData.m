@@ -1,4 +1,4 @@
-ï»¿function [x, y, z] = LoadSavedData(filename, plot)
+function [x, y, z] = LoadSavedData(filename, plot)
 % Load saved .csv file into workspace and plot the data points in figure
 % Input:
 %   filename - file name and path of the .csv file (format for each line: 
@@ -11,19 +11,19 @@ if (nargin == 1)
     plot = 0;
 end
 
-% åˆå§‹åŒ–å˜é‡ã€‚
+% ³õÊ¼»¯±äÁ¿¡£
 delimiter = ',';
 formatSpec = '%f%f%f%[^\n\r]';
 fileID = fopen(filename,'r');
 
-% æ ¹æ®æ ¼å¼è¯»å–æ•°æ®åˆ—ã€‚
-% è¯¥è°ƒç”¨åŸºäºç”Ÿæˆæ­¤ä»£ç æ‰€ç”¨çš„æ–‡ä»¶çš„ç»“æ„ã€‚å¦‚æœå…¶ä»–æ–‡ä»¶å‡ºç°é”™è¯¯ï¼Œè¯·å°è¯•é€šè¿‡å¯¼å…¥å·¥å…·é‡æ–°ç”Ÿæˆä»£ç ã€‚
+% ¸ù¾İ¸ñÊ½¶ÁÈ¡Êı¾İÁĞ¡£
+% ¸Ãµ÷ÓÃ»ùÓÚÉú³É´Ë´úÂëËùÓÃµÄÎÄ¼şµÄ½á¹¹¡£Èç¹ûÆäËûÎÄ¼ş³öÏÖ´íÎó£¬Çë³¢ÊÔÍ¨¹ıµ¼Èë¹¤¾ßÖØĞÂÉú³É´úÂë¡£
 dataArray = textscan(fileID, formatSpec, 'Delimiter', delimiter, 'EmptyValue' ,NaN, 'ReturnOnError', false);
 
-% å…³é—­æ–‡æœ¬æ–‡ä»¶ã€‚
+% ¹Ø±ÕÎÄ±¾ÎÄ¼ş¡£
 fclose(fileID);
 
-% å°†å¯¼å…¥çš„æ•°ç»„åˆ†é…ç»™åˆ—å˜é‡åç§°
+% ½«µ¼ÈëµÄÊı×é·ÖÅä¸øÁĞ±äÁ¿Ãû³Æ
 x = dataArray{:, 1};
 y = dataArray{:, 2};
 z = dataArray{:, 3};
@@ -38,8 +38,8 @@ switch(plot)
         xlabel('x');ylabel('y');zlabel('z');
         axis equal
     case 2
-        % ç½‘æ ¼åŒ–
-        num_x = size(tabulate(x), 1); % ç»Ÿè®¡æœ‰å¤šå°‘ä¸ªä¸åŒçš„xå€¼
+        % Íø¸ñ»¯
+        num_x = size(tabulate(x), 1); % Í³¼ÆÓĞ¶àÉÙ¸ö²»Í¬µÄxÖµ
         num_y = size(tabulate(y), 1);
         if (num_x * num_y ~= length(x))
             error('Incomplete data file, please use plot=1 to draw the figure.');

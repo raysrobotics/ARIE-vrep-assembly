@@ -1,12 +1,12 @@
-ï»¿dt = 2;
+dt = 1;
 
 figure1 = figure;
 axes1 = axes('Parent',figure1);
 hold(axes1,'on');
 
-[X, Y, Z] = LoadSavedData('results2018-01-16-1742_port19997.csv');
+[X, Y, Z] = LoadSavedData('D:\Projects\VREP\python-20180326\tri_peg_hole_data\x15_z0-120\results2018-03-27-0623_port20004.csv');
 
-num_x = size(tabulate(X), 1); % ç»Ÿè®¡æœ‰å¤šå°‘ä¸ªä¸åŒçš„xå€¼
+num_x = size(tabulate(X), 1); % Í³¼ÆÓĞ¶àÉÙ¸ö²»Í¬µÄxÖµ
 num_y = size(tabulate(Y), 1);
 if (num_x * num_y ~= length(X))
     error('Incomplete data file, please use plot=1 to draw the figure.');
@@ -21,15 +21,18 @@ Y = Y(1:dt:end, 1:dt:end);
 Z = Z(1:dt:end, 1:dt:end);
 mesh(X, Y, Z,'Parent',axes1);
 
-% åˆ›å»º label
+% ´´½¨ label
 xlabel('x','Interpreter','latex');
 zlabel('z','Interpreter','latex');
 ylabel('y','Interpreter','latex');
 
 view(axes1,[-39.1 58.16]);
 grid(axes1,'on');
-axis(axes1,'tight');
-% è®¾ç½®å…¶ä½™åæ ‡è½´å±æ€§
-set(axes1,'DataAspectRatio',[1 1 1],'XTickLabel',{'','','','','',''},...
-    'YTickLabel',{'','','','','',''},'ZTickLabel',{'',''});
+% axis(axes1,'tight');
+% % ÉèÖÃÆäÓà×ø±êÖáÊôĞÔ
+% set(axes1,'DataAspectRatio',[1 1 1],'XTickLabel',{'','','','','',''},...
+%     'YTickLabel',{'','','','','',''},'ZTickLabel',{'',''});
 
+axis on;
+axis([-0.015,0.015,-0.005,0.025,0.12,0.15]);
+set(axes1,'DataAspectRatio',[1 1 1]);
