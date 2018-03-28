@@ -1,1 +1,1 @@
-./run_vrep.bat 18 -h
+./run_vrep.bat 1

@@ -42,10 +42,6 @@ import argparse
 parser = argparse.ArgumentParser(description='Generate ARIE for the parts.')
 parser.add_argument('model_name', type=str, 
                     help='the name of the model')
-#parser.add_argument('peg_path', type=str, 
-#                    help='the path of the peg model file')
-#parser.add_argument('hol_path', type=str, 
-#                    help='the path of the hole model file')
 parser.add_argument('--ip-addr', type=str, default='127.0.0.1', 
                     help='the IP address of the vrep server')
 parser.add_argument('--port', type=int, default=19997, 
@@ -90,9 +86,6 @@ model_info=json.load(open(json_path))
 #obj_hol_path = args.hol_path #'D:/Projects/ADAMS/WYZTB/vrep_model/beidonghuan1.stl'
 obj_peg_path = '%s/%s' % (cur_path, model_info[model_name]['peg']['file_path'])
 obj_hol_path = '%s/%s' % (cur_path, model_info[model_name]['hole']['file_path'])
-
-#obj_peg_init_pos = [0, 0, 60e-2]
-#obj_peg_init_ore = [0, -np.pi/2-np.deg2rad(float(sys.argv[1])), 0]
 
 x_delta = args.precision_x
 y_delta = args.precision_y
@@ -180,38 +173,28 @@ if res==vrep.simx_return_ok:
 
 # Set initial pose for the peg and hole
 obj_hol_init_pos = model_info[model_name]['hole']['init_pos']
-vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
+obj_hol_init_ore = np.deg2rad(model_info[model_name]['hole']['init_ore']).tolist()
+vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_oneshot)
+vrep.simxSetObjectOrientation(clientID, h_hole, -1, obj_hol_init_ore, vrep.simx_opmode_oneshot )
+
 
 obj_peg_init_pos = model_info[model_name]['peg']['init_pos']
 obj_peg_init_ore = np.deg2rad(model_info[model_name]['peg']['init_ore']).tolist()
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_blocking)
-vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_oneshot)
+vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_oneshot)
 
-# Set Orientation of the peg(ore_x_peg, ore_y_peg, ore_z_peg) relative to its own coordinate framework
-#obj_peg_init_ore = [np.deg2rad(ore_x_peg), np.deg2rad(0), np.deg2rad(0)]
-#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
-#
-#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(ore_y_peg), np.deg2rad(0)]
-#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
-#
-#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(ore_z_peg)]
-#vrep.simxSetObjectOrientation(clientID, h_peg, h_peg, obj_peg_init_ore, vrep.simx_opmode_blocking)
-
-
+# Set target pose for the peg
 retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0]+np.deg2rad(ore_x_peg), curr_pos[1], curr_pos[2]];
-#obj_peg_init_ore = [np.deg2rad(peg_ore_x), np.deg2rad(0), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_oneshot)
 
 retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0], curr_pos[1]+np.deg2rad(ore_y_peg), curr_pos[2]];
-#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(peg_ore_y), np.deg2rad(0)]
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_oneshot)
 
 retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0], curr_pos[1], curr_pos[2]+np.deg2rad(ore_z_peg)];
-#obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(peg_ore_z)]
-vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_blocking)
+vrep.simxSetObjectOrientation(clientID, h_peg, -1, new_pos, vrep.simx_opmode_oneshot)
 
 
 # Fit to view
