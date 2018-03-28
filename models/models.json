@@ -11,7 +11,7 @@
         {
           "description": "insert by corner",
           "init_pos": [0,0,0.15],
-          "init_ore": [0,0,180]
+          "init_ore": [0,0,60]
         }
       ]
     },
@@ -26,7 +26,7 @@
         {
           "description": "insert by corner",
           "init_pos": [0,0,0.046],
-          "init_ore": [0,0,180]
+          "init_ore": [0,0,60]
         }
       ]
     },
@@ -77,7 +77,7 @@
         {
           "description": "insert by corner",
           "init_pos": [0,0,0.15],
-          "init_ore": [0,0,18]
+          "init_ore": [0,0,36]
         }
       ]
     },
@@ -92,10 +92,76 @@
         {
           "description": "insert by corner",
           "init_pos": [0,0,0.046],
-          "init_ore": [0,0,18]
+          "init_ore": [0,0,36]
         }
       ]
     },
     "description_file_path": "models/rec_peg_hole/model_readme.md"
+  },
+  "hexagon_peg_hole": {
+    "peg": {
+      "file_path": "models/hex_peg_hole/peg_hexagon.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.15],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.15],
+          "init_ore": [0,0,30]
+        }
+      ]
+    },
+    "hole": {
+      "file_path": "models/hex_peg_hole/hole_hexagon.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.046],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.046],
+          "init_ore": [0,0,30]
+        }
+      ]
+    },
+    "description_file_path": "models/hex_peg_hole/model_readme.md"
+  },
+  "heptagon_peg_hole": {
+    "peg": {
+      "file_path": "models/hep_peg_hole/peg_heptgon.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.15],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.15],
+          "init_ore": [0,0,25.71]
+        }
+      ]
+    },
+    "hole": {
+      "file_path": "models/hep_peg_hole/hole_heptagon.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.046],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.046],
+          "init_ore": [0,0,25.71]
+        }
+      ]
+    },
+    "description_file_path": "models/hep_peg_hole/model_readme.md"
   }
 }

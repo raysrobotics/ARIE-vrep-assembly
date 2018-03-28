@@ -1,6 +1,8 @@
-% fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x+20_z0-120\';
-fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x-20_z0-120\';
-% fileFolder='D:\Projects\VREP\python-20180326\rec_peg_hole_data\x20_z0-90\';
+% fileFolder='D:\Projects\VREP\python-20180326\peg_hole_data-20180328\rect_conf0_x20\';
+% fileFolder='D:\Projects\VREP\python-20180326\peg_hole_data-20180328\rect_conf1_x20\';
+
+fileFolder='D:\Projects\VREP\python-20180326\peg_hole_data-20180328\tri_conf0_x20\';
+
 is_plot = 0;
 
 dirOutput=dir(fullfile(fileFolder,'*.csv'));%如果存在不同类型的文件，用‘*’读取所有，如果读取特定类型文件，'.'加上文件类型，例如用‘.jpg’
@@ -10,8 +12,8 @@ dt = 1;
 x_angles = [10, 15, 20];
 z_angles = 0:5:5*(size(fileNames, 1)-1);
 
-x_cons = [-0.025, 0.03];
-y_cons = [-0.01, 0.03];
+x_cons = [-0.1, 0.1];
+y_cons = [-0.1, 0.1];
 
 d_min = zeros(1, length(z_angles));
 
@@ -52,4 +54,5 @@ for i=1:length(z_angles)
 end
 
 figure;
-plot(z_angles, d_min);
+plot(z_angles, d_min); hold on
+plot(z_angles, d_min, 'r*');
