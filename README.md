@@ -41,3 +41,9 @@ ARIE visualization package based on v-rep simulation environment
 
 
 
+~~```[安装目录]\system\usrset.txt```~~
+
+~~**重要：**请在上述文件中设置 **redirectStatusbarMsgToConsoleInHeadlessMode**值为 *true* ，否则无界面模式（headless)仿真会出错~~
+
+
+
