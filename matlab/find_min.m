@@ -1,5 +1,6 @@
-% fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x20_z0-120\';%文件夹名plane
-fileFolder='D:\Projects\VREP\python-20180326\rec_peg_hole_data\x20_z0-90\';
+% fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x+20_z0-120\';
+fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x-20_z0-120\';
+% fileFolder='D:\Projects\VREP\python-20180326\rec_peg_hole_data\x20_z0-90\';
 is_plot = 0;
 
 dirOutput=dir(fullfile(fileFolder,'*.csv'));%如果存在不同类型的文件，用‘*’读取所有，如果读取特定类型文件，'.'加上文件类型，例如用‘.jpg’
@@ -7,7 +8,7 @@ fileNames={dirOutput.name}';
 
 dt = 1;
 x_angles = [10, 15, 20];
-z_angles = 0:5:85;
+z_angles = 0:5:5*(size(fileNames, 1)-1);
 
 x_cons = [-0.025, 0.03];
 y_cons = [-0.01, 0.03];
