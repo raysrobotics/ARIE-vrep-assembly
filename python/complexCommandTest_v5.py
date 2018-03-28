@@ -37,6 +37,7 @@ except:
 
 import sys
 import os
+import json
 #import ctypes
 import time
 try:
@@ -53,10 +54,16 @@ except:
 # obj_hol_path = '/home/ray/MyModels/hole_40_2.obj'
 
 remoteIP = '127.0.0.1'
+model_name = 'rectangle_peg_hole' #'pentagon_peg_hole' #'rectangle_peg_hole'
 
+
+# load model info from models.json
 cur_path = os.path.dirname(os.path.realpath('./'))
-obj_peg_path = '%s/models/tri_peg_hole/peg_tri_r_200_h_801.stl' % cur_path
-obj_hol_path = '%s/models/tri_peg_hole/hol_tri_r_201_h_901.stl' % cur_path
+json_path = '%s/models/models.json' % cur_path
+model_info=json.load(open(json_path))
+
+obj_peg_path = '%s/%s' % (cur_path, model_info[model_name]['peg']['file_path'])
+obj_hol_path = '%s/%s' % (cur_path, model_info[model_name]['hole']['file_path'])
 
 #obj_peg_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/peg_tri_r_200_h_801.stl'
 #obj_hol_path = 'D:/Projects/3D models/simbody_test/tri_peg_hole/hol_tri_r_201_h_901.stl'
@@ -118,15 +125,14 @@ if res==vrep.simx_return_ok:
     print ('Peg name set!') 
 
 
-obj_hol_init_pos = [0, 0, 0.046]
+obj_hol_init_pos = model_info[model_name]['hole']['init_pos']
 vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
 
-obj_peg_init_pos = [0, 0.005, 15e-2]
-obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(-90)]
+obj_peg_init_pos = model_info[model_name]['peg']['init_pos']
+obj_peg_init_ore = np.deg2rad(model_info[model_name]['peg']['init_ore']).tolist()
 vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_blocking)
 vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
 vrep.simxGetObjectOrientation(clientID,h_peg,h_peg,vrep.simx_opmode_streaming)
-
 
 peg_ore_x = 0
 peg_ore_y = 0

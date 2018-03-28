@@ -1,10 +1,13 @@
-fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x20_z0-120\';%文件夹名plane
+% fileFolder='D:\Projects\VREP\python-20180326\tri_peg_hole_data\x20_z0-120\';%文件夹名plane
+fileFolder='D:\Projects\VREP\python-20180326\rec_peg_hole_data\x20_z0-90\';
+is_plot = 0;
+
 dirOutput=dir(fullfile(fileFolder,'*.csv'));%如果存在不同类型的文件，用‘*’读取所有，如果读取特定类型文件，'.'加上文件类型，例如用‘.jpg’
 fileNames={dirOutput.name}';
 
 dt = 1;
 x_angles = [10, 15, 20];
-z_angles = 0:5:115;
+z_angles = 0:5:85;
 
 x_cons = [-0.025, 0.03];
 y_cons = [-0.01, 0.03];
@@ -36,14 +39,16 @@ for i=1:length(z_angles)
     
     d_min(i) = min(min(Z));
     
-    figure;
-    mesh(X, Y, Z);
-    view(0, 90);
-    % 创建 label
-    xlabel('x','Interpreter','latex');
-    zlabel('z','Interpreter','latex');
-    ylabel('y','Interpreter','latex');
+    if (is_plot == 1)
+        figure;
+        mesh(X, Y, Z);
+        view(0, 90);
+        % 创建 label
+        xlabel('x','Interpreter','latex');
+        zlabel('z','Interpreter','latex');
+        ylabel('y','Interpreter','latex');
+    end
 end
 
 figure;
-plot(z_angles, d_min)
+plot(z_angles, d_min);

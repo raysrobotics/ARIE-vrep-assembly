@@ -34,15 +34,18 @@ except:
 
 import sys,os
 #import ctypes
+import json
 import time
 import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser(description='Generate ARIE for the parts.')
-parser.add_argument('peg_path', type=str, 
-                    help='the path of the peg model file')
-parser.add_argument('hol_path', type=str, 
-                    help='the path of the hole model file')
+parser.add_argument('model_name', type=str, 
+                    help='the name of the model')
+#parser.add_argument('peg_path', type=str, 
+#                    help='the path of the peg model file')
+#parser.add_argument('hol_path', type=str, 
+#                    help='the path of the hole model file')
 parser.add_argument('--ip-addr', type=str, default='127.0.0.1', 
                     help='the IP address of the vrep server')
 parser.add_argument('--port', type=int, default=19997, 
@@ -76,8 +79,17 @@ args = parser.parse_args()
 
 remoteIP     = args.ip_addr
 remotePort   = args.port
-obj_peg_path = args.peg_path #'D:/Projects/ADAMS/WYZTB/vrep_model/zhudonghuan1.stl'
-obj_hol_path = args.hol_path #'D:/Projects/ADAMS/WYZTB/vrep_model/beidonghuan1.stl'
+
+model_name = args.model_name
+# load model info from models.json
+cur_path = os.path.dirname(os.path.realpath('./'))
+json_path = '%s/models/models.json' % cur_path
+model_info=json.load(open(json_path))
+
+#obj_peg_path = args.peg_path #'D:/Projects/ADAMS/WYZTB/vrep_model/zhudonghuan1.stl'
+#obj_hol_path = args.hol_path #'D:/Projects/ADAMS/WYZTB/vrep_model/beidonghuan1.stl'
+obj_peg_path = '%s/%s' % (cur_path, model_info[model_name]['peg']['file_path'])
+obj_hol_path = '%s/%s' % (cur_path, model_info[model_name]['hole']['file_path'])
 
 #obj_peg_init_pos = [0, 0, 60e-2]
 #obj_peg_init_ore = [0, -np.pi/2-np.deg2rad(float(sys.argv[1])), 0]
@@ -167,11 +179,11 @@ if res==vrep.simx_return_ok:
     print ('Peg name set!') 
 
 # Set initial pose for the peg and hole
-obj_hol_init_pos = [0, 0, 0.046]
+obj_hol_init_pos = model_info[model_name]['hole']['init_pos']
 vrep.simxSetObjectPosition(clientID, h_hole, -1, obj_hol_init_pos, vrep.simx_opmode_blocking)
 
-obj_peg_init_pos = [0, 0.005, 15e-2]
-obj_peg_init_ore = [np.deg2rad(0), np.deg2rad(0), np.deg2rad(-90)]
+obj_peg_init_pos = model_info[model_name]['peg']['init_pos']
+obj_peg_init_ore = np.deg2rad(model_info[model_name]['peg']['init_ore']).tolist()
 vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_blocking)
 vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_blocking)
 
