@@ -1,9 +1,15 @@
-% fileFolder='D:\Projects\VREP\python-20180326\peg_hole_data-20180328\rect_conf0_x20\';
-% fileFolder='D:\Projects\VREP\python-20180326\peg_hole_data-20180328\rect_conf1_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\tri_conf1_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\tri_conf0_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\rect_conf0_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\rect_conf1_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hep_conf0_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hep_conf1_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hex_conf0_x20\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hex_conf1_x20\';
+fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\penta_conf0_x20_delta4\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\pent_conf1_x20\';
 
-fileFolder='D:\Projects\VREP\python-20180326\peg_hole_data-20180328\tri_conf0_x20\';
-
-is_plot = 0;
+is_plot = 1;
 
 dirOutput=dir(fullfile(fileFolder,'*.csv'));%如果存在不同类型的文件，用‘*’读取所有，如果读取特定类型文件，'.'加上文件类型，例如用‘.jpg’
 fileNames={dirOutput.name}';
@@ -55,4 +61,4 @@ end
 
 figure;
 plot(z_angles, d_min); hold on
-plot(z_angles, d_min, 'r*');
+plot(z_angles, d_min, 'r*'); hold off

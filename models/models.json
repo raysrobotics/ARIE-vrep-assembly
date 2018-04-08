@@ -1,4 +1,37 @@
 {
+  "dual_round_peg_hole": {
+    "peg": {
+      "file_path": "models/dual_rnd_peg_hole/dual_peg.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.16],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.16],
+          "init_ore": [0,0,0]
+        }
+      ]
+    },
+    "hole": {
+      "file_path": "models/dual_rnd_peg_hole/dual_hole.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.047],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.047],
+          "init_ore": [0,0,0]
+        }
+      ]
+    },
+    "description_file_path": "models/dual_rnd_peg_hole/model_readme.md"
+  },
   "triangle_peg_hole": {
     "peg": {
       "file_path": "models/tri_peg_hole/peg_tri_r_200_h_801.stl",

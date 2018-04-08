@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 set IPADDR="127.0.0.1"
-set MODEL_NAME="rectangle_peg_hole"
+set MODEL_NAME="dual_round_peg_hole"
 set CONF_NUM=0
 set X_START=-0.04
 set X_END=0.04

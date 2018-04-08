@@ -54,8 +54,8 @@ except:
 # obj_hol_path = '/home/ray/MyModels/hole_40_2.obj'
 
 remoteIP = '127.0.0.1'
-model_name = "triangle_peg_hole"#'pentagon_peg_hole' #'rectangle_peg_hole' #
-conf_num = 1 # 0 - insert by edge 1 - insert by corner
+model_name = "dual_round_peg_hole"#'pentagon_peg_hole' #'rectangle_peg_hole' #
+conf_num = 0 # 0 - insert by edge 1 - insert by corner
 
 # load model info from models.json
 cur_path = os.path.dirname(os.path.realpath('./'))
@@ -138,9 +138,9 @@ obj_peg_init_ore = np.deg2rad(model_info[model_name]['peg']['config'][conf_num][
 vrep.simxSetObjectPosition(clientID, h_peg, -1, obj_peg_init_pos, vrep.simx_opmode_oneshot)
 vrep.simxSetObjectOrientation(clientID, h_peg, -1, obj_peg_init_ore, vrep.simx_opmode_oneshot)
 
-peg_ore_x = 0
+peg_ore_x = 20
 peg_ore_y = 0
-peg_ore_z = 20
+peg_ore_z = 0
 
 retCode,curr_pos=vrep.simxGetObjectOrientation(clientID,h_peg,-1,vrep.simx_opmode_blocking)
 new_pos = [curr_pos[0]+np.deg2rad(peg_ore_x), curr_pos[1], curr_pos[2]];
