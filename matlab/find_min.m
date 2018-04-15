@@ -6,8 +6,9 @@
 % fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hep_conf1_x20\';
 % fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hex_conf0_x20\';
 % fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\hex_conf1_x20\';
-fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\penta_conf0_x20_delta4\';
+% fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\penta_conf0_x20_delta4\';
 % fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\pent_conf1_x20\';
+fileFolder='Z:\github\vrep_arie\V-rep-based-ARIE-Visualization\results\dual_rprh_x20\';
 
 is_plot = 1;
 
