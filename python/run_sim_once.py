@@ -1,28 +1,10 @@
-# Copyright 2006-2017 Coppelia Robotics GmbH. All rights reserved. 
-# marc@coppeliarobotics.com
-# www.coppeliarobotics.com
-# 
-# -------------------------------------------------------------------
-# THIS FILE IS DISTRIBUTED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED
-# WARRANTY. THE USER WILL USE IT AT HIS/HER OWN RISK. THE ORIGINAL
-# AUTHORS AND COPPELIA ROBOTICS GMBH WILL NOT BE LIABLE FOR DATA LOSS,
-# DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING OR
-# MISUSING THIS SOFTWARE.
-# 
-# You are free to use/modify/distribute this file for whatever purpose!
-# -------------------------------------------------------------------
-#
-# This file was automatically created for V-REP release V3.4.0 rev. 1 on April 5th 2017
+'''
+This script is used for debugging the simulation.
+All the parameters are listed on the top of the lines.
 
-# This example illustrates how to execute complex commands from
-# a remote API client. You can also use a similar construct for
-# commands that are not directly supported by the remote API.
-#
-# Load the demo scene 'remoteApiCommandServerExample.ttt' in V-REP, then 
-# start the simulation and run this program.
-#
-# IMPORTANT: for each successful call to simxStart, there
-# should be a corresponding call to simxFinish at the end!
+TODO: implement a more detailed instruction.
+'''
+
 
 try:
     import vrep
@@ -38,7 +20,6 @@ except:
 import sys
 import os
 import json
-#import ctypes
 import time
 try:
     import numpy as np

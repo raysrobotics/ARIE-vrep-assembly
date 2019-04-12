@@ -1,9 +1,16 @@
 @echo off
-REM 参数%1：需开启几个vrep console  参数%2（可选）：-h 有该参数则不显示图形界面
+echo "Usage: run_vrep [num_of_instance] (-h)"
+echo "[num_of_instance]: The number of vrep consoles to launch"
+echo "-h: (optional) Run vrep in headless mode"
+REM Param%1：The number of vrep consoles to launch  Param%2(optional)：-h Run vrep in headless mode
 
-
-REM 在这里配置vrep的安装目录，默认为C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe
+REM Please specify the install path of vrep executable. The default value is:
+REM C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe
 set VREP="C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
+
+
+REM The following parameters should not be modified unless you know what you should change accordingly
+REM The port corresponding to the vrep instance. The first instance uses port 19997, the second 19998,...
 set PORT_START=19997
 set /a PORT_END=%1+19997-1
 

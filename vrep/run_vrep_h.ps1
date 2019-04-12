@@ -1,1 +1,0 @@
-./run_vrep.bat 30 -h
