@@ -1,49 +1,40 @@
 # V-rep based ARIE Visualization
-ARIE visualization package based on v-rep simulation environment
+ARIE visualization package based on v-rep simulation environment.
+
+##### Description:
+
+The simulation is used to visualize the 3D attractive region in environment in part-mating tasks. The simulation depends on V-Rep, a light-weight robot simulation environment. Using its collision detection and remote API, the contact state between the objects to be mated are extracted. 
+
+Matlab or Python is used as the scripting language to write simulation logic, and communicates with V-Rep through TCP protocol.
 
 
 
-## 配置和运行方法
+## How to use
 
-1. 安装V-REP（目前在3.4.0版本上可正常运行）；
-2. 安装Python 3.5（可通过Anaconda安装依赖的包）；
-3. 从https://gitee.com/raysworld/V-rep-based-ARIE-Visualization下载源代码；
-4. 运行```/vrep_files```文件夹下的run_vrep.ps1脚本开启vrep console，每个开启的console对应一个端口，可通过remote API进行通讯；
-5. 运行```/python_files```文件夹下的run_sim.bat脚本运行仿真
-
-
-
-## V-rep based ARIE Visualization
-
-说明：
-
-该仿真主要基于V-Rep的碰撞检测和remote API，利用Matlab或者Python作为脚本语言编写仿真逻辑，通过TCP协议与V-Rep仿真环境通信，从而实现三维环境约束域的可视化。
+1. Install V-REP (>=3.4.0);
+2. Install Python (>=3.5);
+3. Clone this repository `https://github.com/raysworld/ARIE-vrep-simulation`;
+4. Run `/vrep_files/run_vrep.ps1` to launch the server. Each instance corresponds to a simulation. You may access different simulations via different port numbers.
+5. Run `/python_files/run_sim.bat` to start the simulation
 
 
 
-主要分两部分配置：服务器端（V-Rep）和脚本端（Matlab/Python）
+## Cite
 
+If you use this toolbox in your research please cite it:
 
+```
+@article{rui2017,
+   author = {Li, Rui and Qiao, Hong},
+   title = {Condition and Strategy Analysis for Assembly Based on Attractive Region in Environment},
+   journal = {IEEE/ASME Transactions on Mechatronics},
+   volume = {22},
+   number = {5},
+   pages = {2218-2228},
+   ISSN = {1083-4435},
+   DOI = {10.1109/TMECH.2017.2705180},
+   year = {2017}
+}
 
-### 服务器端（V-Rep）配置
-
-所需文件放置在/vrep_files文件夹下：
-
-```RemoteApi_ARIE_Assembly.ttt```
-
-后缀名为.ttt的是V-Rep的场景文件，里面包含了一些V-Rep的remote API没有提供的函数（通过自定义函数功能实现）。具体请参见remoteApiCommandServer上绑定的Customization script。
-
-
-
-```remoteApiConnections.txt```
-
-该文件是V-Rep安装后存在与其安装目录内的文件，里面定义了所有V-Rep在启动时将自动开启的remote API service。由于我们可以利用命令行实现程序多开，而并不需要一个程序开启多个端口，因此可以利用```//```将该文件内的所有内容都注释掉。
-
-
-
-~~```[安装目录]\system\usrset.txt```~~
-
-~~**重要：**请在上述文件中设置 **redirectStatusbarMsgToConsoleInHeadlessMode**值为 *true* ，否则无界面模式（headless)仿真会出错~~
-
-
+```
 
