@@ -1,4 +1,11 @@
 # V-rep based ARIE Visualization
+<p>
+    <a href="https://github.com/raysrobotics/ARIE-matlab-rprh/blob/master/LICENSE"><img alt="Software License" src="https://img.shields.io/badge/license-CASIA-blue.svg"></a>
+    <a><img alt="Python Version" src="https://img.shields.io/badge/python-3.5-yellow.svg"></a>
+    <a><img alt="V-REP Version" src="https://img.shields.io/badge/vrep-3.4.0-yellow.svg"></a>
+</p>
+
+
 ARIE visualization package based on v-rep simulation environment.
 
 ##### Description:
