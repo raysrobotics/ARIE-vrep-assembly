@@ -215,7 +215,7 @@ for x in x_range:
     
     for y in y_range:
         if is_first_five_runs:
-            time_start = time.clock()
+            time_start = time.time()
         
         res,retInts,retFloats,retStrings,retBuffer=vrep.simxCallScriptFunction(clientID,'remoteApiCommandServer',vrep.sim_scripttype_customizationscript,'findLowestPoint2_function',[h_peg, h_hole],[downward_depth, downward_precision, x, y, z_init],[],emptyBuff,vrep.simx_opmode_blocking)   
         if res==vrep.simx_return_ok:
@@ -234,7 +234,7 @@ for x in x_range:
                 sys.exit(-1)
                 
         if is_first_five_runs:
-            time_end = time.clock()
+            time_end = time.time()
             average_time = average_time + (time_end-time_start)
             five_counter = five_counter + 1
             if five_counter >= 5:

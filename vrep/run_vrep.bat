@@ -6,7 +6,8 @@ REM Param%1：The number of vrep consoles to launch  Param%2(optional)：-h Run 
 
 REM Please specify the install path of vrep executable. The default value is:
 REM C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe
-set VREP="C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
+@REM set VREP="C:\Program Files\V-REP3\V-REP_PRO_EDU\vrep.exe"
+set VREP="C:\Program Files\CoppeliaRobotics\CoppeliaSimEdu\coppeliaSim.exe"
 
 
 REM The following parameters should not be modified unless you know what you should change accordingly

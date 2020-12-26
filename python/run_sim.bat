@@ -8,8 +8,8 @@ set X_START=-0.04
 set X_END=0.04
 set Y_START=-0.04
 set Y_END=0.04
-set X_PRECISION=5e-4
-set Y_PRECISION=5e-4
+set X_PRECISION=5e-3
+set Y_PRECISION=5e-3
 
 set PORT_START=19997
 set /a PORT_END=%1+19997-1

@@ -1,8 +1,8 @@
 # V-rep based ARIE Visualization
 <p>
     <a href="https://github.com/raysrobotics/ARIE-matlab-rprh/blob/master/LICENSE"><img alt="Software License" src="https://img.shields.io/badge/license-CASIA-blue.svg"></a>
-    <a><img alt="Python Version" src="https://img.shields.io/badge/python-3.5-yellow.svg"></a>
-    <a><img alt="V-REP Version" src="https://img.shields.io/badge/vrep-3.4.0-yellow.svg"></a>
+    <a><img alt="Python Version" src="https://img.shields.io/badge/python-3.7-yellow.svg"></a>
+    <a><img alt="CoppeliaSim Version" src="https://img.shields.io/badge/CoppeliaSim-4.1.0-yellow.svg"></a>
 </p>
 
 
@@ -18,11 +18,11 @@ Matlab or Python is used as the scripting language to write simulation logic, an
 
 ## How to use
 
-1. Install V-REP (>=3.4.0);
-2. Install Python (>=3.5);
+1. Install CoppeliaSim (>=4.1.0);
+2. Install Python (>=3.7);
 3. Clone this repository `https://github.com/raysworld/ARIE-vrep-simulation`;
-4. Run `/vrep_files/run_vrep.ps1` to launch the server. Each instance corresponds to a simulation. You may access different simulations via different port numbers.
-5. Run `/python_files/run_sim.bat` to start the simulation
+4. Run `/vrep_files/run_vrep.ps1` to launch the server. Each instance corresponds to a simulation. You may access different simulations via different port numbers;
+5. Run `/python_files/run_sim.bat <N>` to start the simulation. Note that `N` should be the same with the number in `run_vrep.ps1`.
 
 
 
