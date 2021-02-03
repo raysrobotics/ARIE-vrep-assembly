@@ -98,6 +98,39 @@
     },
     "description_file_path": "models/rec_peg_hole/model_readme.md"
   },
+  "rounded_rectangle_peg_hole": {
+    "peg": {
+      "file_path": "models/rrec_peg_hole/peg.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.45],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.45],
+          "init_ore": [0,0,45]
+        }
+      ]
+    },
+    "hole": {
+      "file_path": "models/rrec_peg_hole/hole.stl",
+      "config": [
+        {
+          "description": "insert by edge",
+          "init_pos": [0,0,0.01],
+          "init_ore": [0,0,0]
+        },
+        {
+          "description": "insert by corner",
+          "init_pos": [0,0,0.01],
+          "init_ore": [0,0,45]
+        }
+      ]
+    },
+    "description_file_path": "models/rrec_peg_hole/model_readme.md"
+  },
   "pentagon_peg_hole": {
     "peg": {
       "file_path": "models/pen_peg_hole/peg_penta.stl",
