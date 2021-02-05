@@ -21,10 +21,12 @@ Matlab or Python is used as the scripting language to write simulation logic, an
 1. Install CoppeliaSim (>=4.1.0);
 2. Install Python (>=3.7);
 3. Clone this repository `https://github.com/raysworld/ARIE-vrep-simulation`;
-4. Run `/vrep_files/run_vrep.ps1` to launch the server. Each instance corresponds to a simulation. You may access different simulations via different port numbers;
-5. Run `/python_files/run_sim.bat <N>` to start the simulation. Note that `N` should be the same with the number in `run_vrep.ps1`.
-
-
+4. Navigate to `simulation` folder, follow the example of `./config/rrec.yaml` to write a simulation configure file.
+5. Follow `rrec.py` to write a simulation script.
+6. Run the script:
+   ```shell
+   python ./rrec.py
+   ```
 
 ## Cite
 
