@@ -48,7 +48,7 @@ def runSimCmd(model_name, conf_num,
     #         creationflags=subprocess.CREATE_NEW_CONSOLE)
 
 ## load yaml
-config_path = './config/rrec.yaml'
+config_path = './config/rrec_z_rot.yaml'
 config = loadYaml(config_path)
 
 ## run vrep

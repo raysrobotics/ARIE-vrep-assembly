@@ -1,6 +1,6 @@
 import csv
 import numpy as np
-import pandas as pd
+# import pandas as pd
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -37,11 +37,12 @@ def csv2array(file_path):
 def local_minima(mat, x_label, y_label):
     coordinates = peak_local_max(-mat, min_distance=20)
 
-    coord_new = []
-    for i, c in enumerate(coordinates):
-        if np.abs(mat[c[0], c[1]] - 0.002) > 0.001:
-            coord_new.append(c)
-    coord_new = np.array(coord_new)
+    # coord_new = []
+    # for i, c in enumerate(coordinates):
+    #     if np.abs(mat[c[0], c[1]] - 0.002) > 0.001:
+    #         coord_new.append(c)
+    # coord_new = np.array(coord_new)
+    coord_new = coordinates
 
     x = x_label[coord_new[:,1]]
     y = y_label[coord_new[:,0]]

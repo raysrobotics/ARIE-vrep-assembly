@@ -1,0 +1,16 @@
+# The config file to run simulation for rounded rectangle peg and hole
+model_name: rounded_rectangle_peg_hole
+configuration_mode: 1
+peg_position:
+  x: -0.0005
+  y: 0.003
+peg_orientation:
+  x_rot: 20.00
+  y_rot: 0.00
+  z_rot: 20.57
+z_range:
+  z_end: -0.08 # the maximum downward depth
+  z_precision: 5e-4
+
+
+
