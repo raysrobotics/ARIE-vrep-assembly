@@ -3,32 +3,32 @@ model_name: rounded_rectangle_peg_hole
 # configuration_mode:
 # 1 - by corner
 # 0 - by edge
-configuration_mode: 1
+configuration_mode: 0
 x_range:
   x_begin: -0.04
   x_end: 0.04
-  x_precision: 5e-4
+  x_precision: 1e-5
 y_range:
   y_begin: -0.04
   y_end: 0.04
-  y_precision: 5e-4
+  y_precision: 1e-5
 z_range:
-  z_end: -0.08 # the maximum downward depth
+  z_end: -0.04 # the maximum downward depth
   z_precision: 5e-4
-x_rot_range: # the rotation around x-axis (degree)
-  x_rot_begin: 0.0
-  x_rot_end: 90.0
-  x_rot_precision: 1.0
+# x_rot_range: # the rotation around x-axis (degree)
+#   x_rot_begin: 0.0
+#   x_rot_end: 90.0
+#   x_rot_precision: 1.0
 # If you set x_rot_range or y_rot_range, the simulation will iterate 
 # around x- or y- axis from []_rot_begin to []_rot_end by []_precision
 # Otherwise, if z_rot_range is set, the simulation will iterate around
 # z-axis of the peg from z_begin to z_end by z_precision, the peg will
 # rotate around x-axis and y-axis by the set angles:
-# z_rot_range:
-#   z_rot_begin: 0.0
-#   z_rot_end: 180.0
-#   z_rot_precision: 1.0
-#   x_rot: 20.0
-#   y_rot: 0.0
+z_rot_range:
+  z_rot_begin: 30.0
+  z_rot_end: 31.0
+  z_rot_precision: 1.0
+  x_rot: 20.0
+  y_rot: 0.0
 
 

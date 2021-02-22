@@ -47,8 +47,35 @@ def runSimCmd(model_name, conf_num,
     #         f'--file-name {output_name}'], 
     #         creationflags=subprocess.CREATE_NEW_CONSOLE)
 
+def showInfo(model_name, conf_num, 
+        x_start, x_end, x_delta, 
+        y_start, y_end, y_delta, 
+        downward_depth, downward_precision,
+        iter_mode, loop_num):
+    msg = f'''----------------------------
+Simulation parameters:
+    model_name: {model_name}
+    config_num: {conf_num}
+
+    x_start: {x_start}
+    x_end: {x_end}
+    x_delta: {x_delta}
+
+    y_start: {y_start}
+    y_end: {y_end}
+    y_delta: {y_delta}
+
+    downward_depth: {downward_depth}
+    downward_precision: {downward_precision}
+
+    iter_mode: {iter_mode}
+----------------------------
+Will run {loop_num} instances simutaneously...
+    '''
+    print(msg)
+
 ## load yaml
-config_path = './config/rrec_z_rot.yaml'
+config_path = './config/rrec_edge_rotz_30.yaml'
 config = loadYaml(config_path)
 
 ## run vrep
@@ -87,6 +114,12 @@ loop_step = config[f'{iter_mode}_rot_range'][f'{iter_mode}_rot_precision']
 loop_num = int((loop_end-loop_begin)/loop_step)
 
 loop_list = np.linspace(loop_begin, loop_end, loop_num)
+
+showInfo(model_name=model_name, conf_num=conf_num,
+    x_start=x_start, x_end=x_end, x_delta=x_delta,
+    y_start=y_start, y_end=y_end, y_delta=y_delta,
+    downward_depth=downward_depth, downward_precision=downward_precision,
+    iter_mode=iter_mode, loop_num=loop_num)
 
 ## run sim
 print('Launching CollepiaSim instances...')

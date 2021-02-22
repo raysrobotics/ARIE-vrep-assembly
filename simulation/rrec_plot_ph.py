@@ -46,7 +46,7 @@ args = parser.parse_args()
 run_vrep = args.run_vrep
 
 ## load yaml
-config_path = './config/rrec_plot_ph.yaml'
+config_path = './config/rrec_plot_ph_corner.yaml'
 config = loadYaml(config_path)
 
 ## run vrep
